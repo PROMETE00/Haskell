@@ -128,7 +128,7 @@ numeroDeRaices a b c
  where
     discriminante = b^2 - 4*a*c
 
---Funcion 9 p2// lista de raices reales
+--Funcion 9 p2// lista de raices reales //formula general
 
 raices :: Double -> Double -> Double -> [Double]
 raices a b c 
@@ -140,11 +140,39 @@ raices a b c
     r1 = (-b + sqrt discriminante) / (2*a)
     r2 = (-b - sqrt discriminante) / (2*a)
 
---Funcion 10 p2//
+--Funcion 10 p2// area triangulo 
 
 area :: Double -> Double -> Double -> Double
 area a b c = sqrt s * (s - a)*(s - b)*(s - c)
  where 
     s = ( a + b + c ) / 2
 
---Funcion 11 p2//
+--Funcion 11 p2//Funcion calcular interseccion max a, min b
+
+interseccion :: Ord a => [a] -> [a] -> [a]
+interseccion [] _ = []
+interseccion _ [] = []
+interseccion [a1 , b1][a2 , b2] 
+ | max a1 a2 <= min b1 b2 = [max a1 a2 , min b1 b2]
+ | otherwise = []
+
+--Funcion 12 p2//linea n de un trinagulo aritmetico
+--inicio = (n(n-1)/2)+1
+--fin = inicio + n -1
+
+linea :: Integer -> [Integer]
+linea n = [inicio..fin]
+  where
+    inicio = (n * (n - 1)) `div` 2 + 1
+    fin = inicio + n - 1
+
+---------------------------Recursividad -----------------------
+
+--Funcion 1 p3//Potencia de x
+--x^n= x * x ^ n-1
+
+potencia :: Integer -> Integer -> Integer
+potencia _ 0 = 1
+potencia x n = x * potencia x ( n - 1 )
+
+--Funcion 2 p3//
