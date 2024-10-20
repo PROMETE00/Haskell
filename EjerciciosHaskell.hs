@@ -1,3 +1,4 @@
+import Data.Array
 --Funcion 1 //calcular promedio aritmetica de 3 calificaciones
 
 promedioAritmetica x y z = (x + y + z ) / 3
@@ -175,4 +176,113 @@ potencia :: Integer -> Integer -> Integer
 potencia _ 0 = 1
 potencia x n = x * potencia x ( n - 1 )
 
---Funcion 2 p3//
+--Funcion 2 p3//Maximo comun divisor
+-- mod a/b //hasta b->0
+
+mcd :: Integer -> Integer -> Integer
+mcd a 0 = a
+mcd a b =  mcd b (a `mod` b) 
+
+--Funcion 3 p3//verificar si el elemento pertenece a la lista
+
+pertenece :: Eq a => a -> [a] -> Bool
+pertenece _ [] = False
+pertenece x (y:ys) 
+ | x == y = True
+ | otherwise = pertenece x ys
+
+--Funcion 4 p3//tomar x elementos de una lista
+
+tomar :: Int -> [a] -> [a]
+tomar 0 xs = []
+tomar _ [] = []
+tomar n (x:xs) = x : tomar ( n-1 ) xs
+
+--Funcion 5 p3//numero a lista de digitos
+
+digitosC :: Integer -> [Integer]
+digitosC n = [read [c] | c <- show (abs n)]
+
+--Funcion 6 p3//suma de digitos 
+
+sumaDigitosR :: Integer -> Integer
+sumaDigitosR n = (n `mod` 10) + sumaDigitosR (n `div`10)
+
+-----------------Ejercicio lista-----------------------------
+
+--Funcion 2.1//
+
+ordenaRapida [] = []
+ordenaRapida (x:xs) = ordenaRapida [y | y <- xs , y <= x] ++ [x] ++ ordenaRapida [y | y <- xs , y > x]
+
+---------------Nuevos tipos de datos ------------------------
+
+data Estudiante = Estudiante {
+    nombre :: String,
+    apellido :: String,
+    edad :: Int,
+    numControl :: Int
+} deriving (Show, Eq)
+
+--lista de estudiantes
+
+listaEstudiantes :: [Estudiante]
+listaEstudiantes = [
+    Estudiante "Juan" "Pérez" 20 21160720,
+    Estudiante "María" "Gómez" 22 21160721,
+    Estudiante "Carlos" "López" 19 21160722,
+    Estudiante "Ana" "Martínez" 23 211607723,
+    Estudiante "Luis" "Rodriguez" 21 2160724,
+    Estudiante "Sofia" "Jiménez" 18 21160725,
+    Estudiante "Pedro" "Torres" 24 21160726,
+    Estudiante "Laura" "Hernández" 21 21160727,
+    Estudiante "Daniel" "Morales" 20 21160728,
+    Estudiante "Paula" "Ortiz" 22 21160729
+    ]
+
+
+
+---------------------Árboles---------------------------------
+
+data Arbol a = Hoja | Nodo a (Arbol a)(Arbol a) deriving(Show, Eq)
+
+generarNodo :: a -> Arbol a 
+generarNodo x = Nodo x Hoja Hoja 
+
+insertar x  Hoja = generarNodo x
+insertar x (Nodo a izq der)
+ | x<a = Nodo a (insertar x izq) der
+ | x>a = Nodo a izq (insertar x der)
+
+-- Función para insertar los elementos de un arreglo en el árbol
+insertarArr :: (Ord a) => Array Int a -> Arbol a -> Arbol a
+insertarArr arr arbol = insertarElementos (indices arr) arbol
+  where
+    insertarElementos [] arbolActual = arbolActual
+    insertarElementos (i:is) arbolActual = insertarElementos is (insertar (arr ! i) arbolActual)
+
+--buscar elementos en arbol
+
+buscar _ Hoja = False  
+buscar x (Nodo a izq der)
+  | x == a = True     
+  | x < a  = buscar x izq  
+  | x > a  = buscar x der 
+
+--Recorrido InOrden
+
+inOrden :: Arbol a -> [a]
+inOrden Hoja = []
+inOrden (Nodo a izq der) = inOrden izq ++[a]++inOrden der
+
+--Recorrido PreOrden
+
+preOrden :: Arbol a -> [a]
+preOrden Hoja = []
+preOrden (Nodo a izq der) = [a] ++ preOrden izq ++ preOrden der
+
+--Recorrido PosOrden
+
+posOrden :: Arbol a -> [a]
+posOrden Hoja = []
+posOrden (Nodo a izq der) = posOrden izq ++ posOrden der ++ [a]
