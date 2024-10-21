@@ -12,22 +12,28 @@ sumaMonedas a b c d e = a + (b*2) + (c*5) + (d*10) + (e*20)
 volumeEsfera r = (4/3) * pi * (r ^ 3)
 
 --Funcion 4//area de una corona
+--r1 es el radio de la circunferencia interior y r2 de la exterior
 
 areaCoronaCircular r1 r2 = pi *(r2^2 - r1^2)
 
---Funcion 5//obtener la ultima cifra
+--Funcion 5//obtener la ultima cifra//rem es el resto de
+--una división entera
 
 ultimaCifra x = rem x 10
 
---Funcion 6//max de tres 
+--Funcion 6//maximo de tres numeros 
 
 maximoDeTres x y z = max x (max y z)
 
---Funcion 7//rotar lista 
+--Funcion 7//rotar lista//head devuelve el primer elemento
+--tail devuelve todos menos el primer elemento
 
 rotar xs = tail xs ++ [head xs]
 
---Funcion 8//rotar n elementos 
+--Funcion 8//rotar n elementos //take devuelve una lista 
+--compuesta por los primeros n elementos de una lista 
+--original.drop devuelve una lista después de eliminar 
+--los primeros n elementos.
 
 rotaNElem n xs = drop n xs ++ take n xs
 
@@ -35,22 +41,29 @@ rotaNElem n xs = drop n xs ++ take n xs
 
 rangoMinMax xs = [min xs , max xs]
 
---Funcion 10//palindromo de lista
+--Funcion 10//verificar si una lista es palindromo 
 
 palindromo xs = xs == reverse xs
 
 --Funcion 11//(interior xs) es la
 -- lista obtenida eliminando los extremos de la lista xs.
+--init es la lista obtenida aliminando el ultimo elemento de xs.
+--tail lista obtenida eliminando el primer elemento.
 
 interior xs = init (tail xs)
 
---Funcion 13//Elementos comprendidos
+--Funcion 13//Extrae un segmento de una lista, comprendido entre los índices a , b .
+--take es la lista de los n primeros elementos de xs.
+--drop borra los n primeros elementos de xs.
  
 segmento a b  xs = take ( b-a + 1) (drop (a-1) xs)
 
---Funcion 14//Definir extremos
+--Funcion 14//Obtener lista por n extremos
+--length xs es el número de elementos de la lista xs.
+--drop n xs borra los n primeros elementos de xs.
+--take n xs es la lista de los n primeros elementos de xs.
 
-extremos a xs = take a xs ++ (take a (drop a xs)) 
+extremos a xs = take a xs ++ take a (drop (length xs - a) xs) 
 
 --Funcion 15//Obtener el numero mediano 
 
@@ -106,13 +119,15 @@ distancia (a,b) (c,d)
  | a == d = 0
  | d > a = d - a 
 
---Funcion 6 p2//
+--Funcion 6 p2//permuta los elementos cilclicamente 
+--de una lista pasado el ultimo elemento al principio
 
---ciclo :: [a] -> [a]
---ciclo (x:xs)
--- | 
+ciclo :: [a] -> [a]
+ciclo [] = []                     
+ciclo [x] = [x]                   
+ciclo xs = last xs : init xs    
 
---Funcion 7 p2//
+--Funcion 7 p2//el numero mayor construido por los 2 digitos 
 
 numeroMayor :: (Num a, Ord a) => a -> a -> a
 numeroMayor a b 
