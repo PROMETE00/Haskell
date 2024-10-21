@@ -121,6 +121,8 @@ distancia (a,b) (c,d)
 
 --Funcion 6 p2//permuta los elementos cilclicamente 
 --de una lista pasado el ultimo elemento al principio
+--last es al último elemento de la lista xs.init es la lista 
+--obtenida eliminando el ultimo elemento de xs 
 
 ciclo :: [a] -> [a]
 ciclo [] = []                     
@@ -134,7 +136,8 @@ numeroMayor a b
  |a < b = (b*10)+a
  |a > b = (a*10)+b
 
---Funcion 8 p2//Numero de reices reales
+--Funcion 8 p2//Numero de raices reales
+--se ocupa lo que esta dentro de la raiz cuadrada de la formula general
 
 numeroDeRaices :: (Floating t, Ord t) => t -> t -> t -> Int
 numeroDeRaices a b c 
@@ -144,7 +147,7 @@ numeroDeRaices a b c
  where
     discriminante = b^2 - 4*a*c
 
---Funcion 9 p2// lista de raices reales //formula general
+--Funcion 9 p2// lista de raices reales //Usando formula general
 
 raices :: Double -> Double -> Double -> [Double]
 raices a b c 
@@ -193,6 +196,7 @@ potencia x n = x * potencia x ( n - 1 )
 
 --Funcion 2 p3//Maximo comun divisor
 -- mod a/b //hasta b->0
+--mod x y es el resto de x entre y 
 
 mcd :: Integer -> Integer -> Integer
 mcd a 0 = a
@@ -214,11 +218,15 @@ tomar _ [] = []
 tomar n (x:xs) = x : tomar ( n-1 ) xs
 
 --Funcion 5 p3//numero a lista de digitos
+--read c es la expresion representada por la cadena c
+--abs x es el valor absoluto de x
 
 digitosC :: Integer -> [Integer]
 digitosC n = [read [c] | c <- show (abs n)]
 
 --Funcion 6 p3//suma de digitos 
+--mod x y es el resto de x entre y 
+--div x y es la division entera  de x entre y 
 
 sumaDigitosR :: Integer -> Integer
 sumaDigitosR n = (n `mod` 10) + sumaDigitosR (n `div`10)
