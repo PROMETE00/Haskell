@@ -1,3 +1,6 @@
+## You can support me at
+https://coff.ee/prome
+
 EjerciciosHaskell.hs --> Funciones Basicas // Funcion 1 hasta 18
 
 EjerciciosHaskell2.hs --> Funciones Guardas y Patrones // Funcion 1 hasta 12
